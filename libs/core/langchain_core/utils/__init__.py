@@ -27,6 +27,7 @@ if TYPE_CHECKING:
         sanitize_for_postgres,
         stringify_dict,
         stringify_value,
+        truncate_text,
     )
     from langchain_core.utils.utils import (
         build_extra_kwargs,
@@ -67,6 +68,7 @@ __all__ = (
     "secret_from_env",
     "stringify_dict",
     "stringify_value",
+    "truncate_text",
     "xor_args",
 )
 
@@ -87,6 +89,7 @@ _dynamic_imports = {
     "sanitize_for_postgres": "strings",
     "stringify_dict": "strings",
     "stringify_value": "strings",
+    "truncate_text": "strings",
     "build_extra_kwargs": "utils",
     "check_package_version": "utils",
     "convert_to_secret_str": "utils",

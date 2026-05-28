@@ -1,10 +1,13 @@
 """Test string utilities."""
 
+import pytest
+
 from langchain_core.utils.strings import (
     comma_list,
     sanitize_for_postgres,
     stringify_dict,
     stringify_value,
+    truncate_text,
 )
 
 
@@ -102,3 +105,13 @@ def test_comma_list_with_iterables() -> None:
 
     # Mixed types
     assert comma_list([1, "two", 3.0]) == "1, two, 3.0"
+
+
+def test_truncate_text() -> None:
+    assert truncate_text("hello world", 5) == "he..."
+    assert truncate_text("short", 10) == "short"
+    assert truncate_text("hello", 5, suffix="") == "hello"
+    assert truncate_text("hello", 2) == ".."
+
+    with pytest.raises(ValueError, match="max_length must be non-negative"):
+        truncate_text("hello", -1)
