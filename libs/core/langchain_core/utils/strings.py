@@ -67,3 +67,22 @@ def sanitize_for_postgres(text: str, replacement: str = "") -> str:
         'Hello world'
     """
     return text.replace("\x00", replacement)
+
+def truncate_text(text: str, max_length: int, suffix: str = "...") -> str:
+    """Truncate text to a maximum length.
+
+    Args:
+        text: The text to truncate.
+        max_length: Maximum resulting string length, including the suffix.
+        suffix: Text to append if truncation occurs.
+
+    Returns:
+        The truncated string.
+    """
+    if max_length < 0:
+        raise ValueError("max_length must be non-negative")
+    if len(text) <= max_length:
+        return text
+    if len(suffix) >= max_length:
+        return suffix[:max_length]
+    return text[: max_length - len(suffix)] + suffix
